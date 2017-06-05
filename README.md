@@ -1,4 +1,3 @@
-
 # iQuantify API
 
 
@@ -65,8 +64,21 @@ Developers should run these often!
 
 ## API
 
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API.
+Scripts are included in [`scripts`](scripts) to test built-in actions.
+
+## Summary of API EndPoints
+| Verb   | URI Pattern                    | Controller#Action         |
+|--------|--------------------------------|---------------------------|
+| POST   | `/sign-up`                     | `users#signup`            |
+| POST   | `/sign-in`                     | `users#signin`            |
+| DELETE | `/sign-out/:id`                | `users#signout`           |
+| PATCH  | `/change-password/:id`         | `users#changepw`          |
+| GET    | `/researches`                  | `researches#index`        |
+| POST   | `/researches`                  | `researches#create`       |
+| GET    | `/researches/:id`              | `researches#show`         |
+| PATCH  | `/researches/:id`              | `researches#update`       |
+| DELETE | `/researches/:id`              | `researches#destroy`      |
+
 
 ### Authentication
 
@@ -256,9 +268,64 @@ Content-Type: application/json; charset=utf-8
   }
 }
 ```
+### Researches
 
-## [License](LICENSE)
+#### POST /researches
 
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+Request:
+```sh
+TOKEN="<your token>"
+TITLE="Crows in WA"
+DESC="This app keeps count of crows in the state of WA"
+DIR="Click the +1 button when you see a crow. Click the -1 button to correct for a mistake."
+MSG="Happy Counting!"
+HIDE=false
+
+API="http://localhost:4741"
+URL_PATH="/researches"
+
+curl "${API}${URL_PATH}" \
+  --include \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Token token=${TOKEN}" \
+  --data '{
+    "research": {
+      "title": "'"${TITLE}"'",
+      "description": "'"${DESC}"'",
+      "directions": "'"${DIR}"'",
+      "announcement": {
+        "message": "'"${MSG}"'"
+      },
+      "hide": "'"${HIDE}"'"
+    }
+  }'
+```
+
+Response:
+```md
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+{
+	"research": {
+		"__v": 0,
+		"updatedAt": "2017-06-05T19:40:18.451Z",
+		"createdAt": "2017-06-05T19:40:18.451Z",
+		"title": "Crows in WA",
+		"description": "This app keeps count of crows in the state of WA",
+		"directions": "Click the +1 button when you see a crow. Click the -1 button to correct for a mistake.",
+		"_owner": "5935b101c2c3b332cec8e544",
+		"_id": "5935b3a2101f7a341fd8ecf4",
+		"hide": false,
+		"announcement": {
+			"message": "Happy Counting!",
+			"updatedAt": "2017-06-05T19:40:18.443Z"
+		},
+		"length": 11,
+		"id": "5935b3a2101f7a341fd8ecf4",
+		"editable": true
+	}
+}
+
+```
