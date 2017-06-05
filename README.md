@@ -388,6 +388,49 @@ Content-Type: application/json; charset=utf-8
 	}
 }
 ```
+#### SHOW /researches/:id
+
+Request:
+```sh
+#!/bin/sh
+
+TOKEN="<your token"
+RESEARCHID="5935bb61101f7a341fd8ecf6"
+API="http://localhost:4741"
+URL_PATH="/researches"
+
+curl "${API}${URL_PATH}/${RESEARCHID}" \
+  --include \
+  --request GET \
+  --header "Authorization: Token token=$TOKEN"
+```
+
+Response:
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+	"research": {
+		"_id": "5935bb61101f7a341fd8ecf6",
+		"updatedAt": "2017-06-05T20:13:21.754Z",
+		"createdAt": "2017-06-05T20:13:21.754Z",
+		"title": "Safeco Toastmasters",
+		"description": "This is the audible pause counter",
+		"directions": "Click the +1 button when you hear an audible pause like umms or uhs. Click the -1 button to correct for a mistaken count.",
+		"_owner": "5935b101c2c3b332cec8e544",
+		"__v": 0,
+		"hide": true,
+		"announcement": {
+			"message": "Happy Counting!",
+			"updatedAt": "2017-06-05T20:13:21.753Z"
+		},
+		"length": 19,
+		"id": "5935bb61101f7a341fd8ecf6",
+		"editable": true
+	}
+}
+```
 
 #### DELETE /researches/:id
 
