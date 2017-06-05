@@ -388,3 +388,24 @@ Content-Type: application/json; charset=utf-8
 	}
 }
 ```
+
+#### DELETE /researches/:id
+
+Request:
+```sh
+TOKEN="<your token"
+RESEARCHID="5935b1c7e801c63310950f61"
+API="http://localhost:4741"
+URL_PATH="/researches"
+
+curl "${API}${URL_PATH}/${RESEARCHID}" \
+  --include \
+  --request DELETE \
+  --header "Authorization: Token token=${TOKEN}"
+
+```
+
+Response:
+```md
+HTTP/1.1 204 No Content
+```
