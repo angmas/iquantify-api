@@ -14,12 +14,10 @@ const researchSchema = new mongoose.Schema({
     required: true
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   directions: {
-    type: String,
-    required: true
+    type: String
   },
   announcement: {
     message: {
@@ -33,7 +31,7 @@ const researchSchema = new mongoose.Schema({
   },
   hide: {
     type: Boolean,
-    default: true
+    default: false
   }
 }, {
   timestamps: true,
