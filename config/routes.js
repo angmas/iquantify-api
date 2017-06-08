@@ -19,3 +19,6 @@ module.exports = require('lib/wiring/routes')
 
 // all routes created
 .resources('researches')
+
+// third table added
+.post('/research/:id', 'quantums#create')

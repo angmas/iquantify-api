@@ -78,6 +78,8 @@ Scripts are included in [`scripts`](scripts) to test built-in actions.
 | GET    | `/researches/:id`              | `researches#show`         |
 | PATCH  | `/researches/:id`              | `researches#update`       |
 | DELETE | `/researches/:id`              | `researches#destroy`      |
+| POST   | `/research/:id`                | `quantums#create`         |
+
 
 
 ### Authentication
@@ -485,3 +487,203 @@ Response:
 ```md
 HTTP/1.1 204 No Content
 ```
+
+### Quantums
+*Summary:*
+
+<table>
+<tr>
+  <th colspan="3">Request</th>
+  <th colspan="2">Response</th>
+</tr>
+<tr>
+  <th>Verb</th>
+  <th>URI</th>
+  <th>body</th>
+  <th>Status</th>
+  <th>body</th>
+</tr>
+<tr>
+<td>POST</td>
+<td>`/research/:id`</td>
+<td>n/a</td>
+<td>201, Created</td>
+<td><strong>quantum</strong></td>
+</tr>
+<tr>
+  <td colspan="3">
+  </td>
+  <td>401 Unauthorized</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>500 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>`/uploads`</td>
+<td>images</td>
+<td>204, No Content</td>
+<td><strong>n/a</strong></td>
+</tr>
+<tr>
+  <td colspan="3">
+  </td>
+  <td>401 Unauthorized</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+  <td colspan="3">
+  </td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+<td>GET</td>
+<td>`/uploads/:id`</td>
+<td>n/a</td>
+<td>200, OK</td>
+<td><strong>upload</strong</td>
+</tr>
+<tr>
+  <td colspan="3">
+  Any user is authorized to do a GET for a single upload.
+  </td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td colspan="3">
+  </td>
+  <td>401 Unauthorized</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+  <td colspan="3">
+  </td>
+  <td>404 Not Found</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>`/uploads/:id`</td>
+<td><em>upload</em></td>
+<td>204, No Content</td>
+<td><strong>empty</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>GET</td>
+<td>`/uploadowners`</td>
+<td><strong>n/a</strong></td>
+<td>200, OK</td>
+<td><strong>users</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>404 Not Found</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>GET</td>
+<td>`/uploads/folder/:path/:owner`</td>
+<td><strong>n/a</strong></td>
+<td>200, OK</td>
+<td><strong>user</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>404 Not Found</td>
+  <td><em>empty</em></td>
+</tr>
+<td>GET</td>
+<td>`/folders/:id`</td>
+<td><strong>n/a</strong></td>
+<td>200, OK</td>
+<td><strong>uploads</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><strong>errors</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>404 Not Found</td>
+  <td><em>empty</em></td>
+</tr>
+</table>
+
+#### POST /researches/:id
+
+Request:
+```sh
+TOKEN="your token"
+ID="5935bb61101f7a341fd8ecf6"
+COUNT=1
+LONG=120
+LAT=88
+
+API="http://localhost:4741"
+URL_PATH="/research/${ID}"
+
+curl "${API}${URL_PATH}" \
+  --include \
+  --request POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Token token=${TOKEN}" \
+  --data '{
+    "quantum": {
+      "count": "'"${COUNT}"'",
+      "longitude": "'"${LONG}"'",
+      "latitude": "'"${LAT}"'"
+    }
+  }'
+```
+
+
+Response:
+```md
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+{
+	"quantum": {
+		"__v": 0,
+		"updatedAt": "2017-06-08T19:09:30.189Z",
+		"createdAt": "2017-06-08T19:09:30.189Z",
+		"count": 1,
+		"longitude": 120,
+		"latitude": 88,
+		"_counter": "5935b101c2c3b332cec8e544",
+		"_research": "5935bb61101f7a341fd8ecf6",
+		"_id": "5939a0ea8ae7de30ff036cad",
+		"id": "5939a0ea8ae7de30ff036cad",
+		"editable": true
+	}
+}
+```
+
+Error:
+``
