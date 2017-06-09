@@ -10,10 +10,45 @@ const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
 
 const index = (req, res, next) => {
+  let tmpResearches = {}
+  let tmpQuanta = {}
+  Quantum.aggregate(
+    [
+      {
+        $group:
+        {
+          _id: '$_research',
+          totalCount: { $sum: '$count' }
+        }
+      }
+    ]
+  )
+  .then(researchTtlCnt => {
+    tmpQuanta = researchTtlCnt
+  })
   Research.find()
+    .then(researches => {
+      tmpResearches = researches
+      return tmpResearches
+    })
+    .then(researches => {
+      let i = 0
+      researches.forEach(research => {
+        for (i = 0; i < tmpQuanta.length; i++) {
+          if (research._id.equals(tmpQuanta[i]._id)) {
+            console.log('tmpQuanta.totalCount: ', tmpQuanta[i].totalCount)
+            research.total = tmpQuanta[i].totalCount
+            console.log('research.total: ', research.total)
+          } else {
+            research.total = 0
+          }
+        }
+      })
+      return researches
+    })
     .then(researches => res.json({
       researches: researches.map((e) =>
-        e.toJSON({ virtuals: true, user: req.user }))
+        e.toJSON({ virtuals: true, user: req.user, research: e }))
     }))
     .catch(next)
 }
