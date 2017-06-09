@@ -26,7 +26,7 @@ const show = (req, res) => {
 const create = (req, res, next) => {
   const quantum = Object.assign(req.body.quantum, {
     _counter: req.user._id,
-    _research: req.params.id
+    _research: req.params.researchid
   })
   Quantum.create(quantum)
     .then(quantum =>
