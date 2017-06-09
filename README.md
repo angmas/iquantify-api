@@ -1,11 +1,12 @@
 # iQuantify API
-
+The iQuantify API is the backend system for the iQuantify Client. It serves up
+the data the way the client needs it.
 
 
 ## Links
--   [iQuantify API](#)
--   [iQuantify Client](#)
--   [iQuantify Client Repository](#)
+-   [iQuantify API](https://github.com/angmas/iquantify-api)
+-   [iQuantify Client](https://angmas.github.io/iquantify-client/#/)
+-   [iQuantify Client Repository](https://github.com/angmas/iquantify-client)
 -   [iQuantify ERD](https://1drv.ms/p/s!AtDNiki6QJ6riPo3T120IVNQdkSZ4Q)
 
 ## Dependencies
@@ -271,6 +272,7 @@ Content-Type: application/json; charset=utf-8
 }
 ```
 ### Researches
+Researches is the table that stores the user's research items. 
 
 #### GET /researches
 
@@ -489,151 +491,7 @@ HTTP/1.1 204 No Content
 ```
 
 ### Quantums
-*Summary:*
-
-<table>
-<tr>
-  <th colspan="3">Request</th>
-  <th colspan="2">Response</th>
-</tr>
-<tr>
-  <th>Verb</th>
-  <th>URI</th>
-  <th>body</th>
-  <th>Status</th>
-  <th>body</th>
-</tr>
-<tr>
-<td>POST</td>
-<td>`/research/:id`</td>
-<td>n/a</td>
-<td>201, Created</td>
-<td><strong>quantum</strong></td>
-</tr>
-<tr>
-  <td colspan="3">
-  </td>
-  <td>401 Unauthorized</td>
-  <td><em>empty</em></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>500 Bad Request</td>
-  <td><strong>errors</strong></td>
-</tr>
-<tr>
-<td>POST</td>
-<td>`/uploads`</td>
-<td>images</td>
-<td>204, No Content</td>
-<td><strong>n/a</strong></td>
-</tr>
-<tr>
-  <td colspan="3">
-  </td>
-  <td>401 Unauthorized</td>
-  <td><em>empty</em></td>
-</tr>
-<tr>
-  <td colspan="3">
-  </td>
-  <td>400 Bad Request</td>
-  <td><strong>errors</strong></td>
-</tr>
-<tr>
-<td>GET</td>
-<td>`/uploads/:id`</td>
-<td>n/a</td>
-<td>200, OK</td>
-<td><strong>upload</strong</td>
-</tr>
-<tr>
-  <td colspan="3">
-  Any user is authorized to do a GET for a single upload.
-  </td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td colspan="3">
-  </td>
-  <td>401 Unauthorized</td>
-  <td><em>empty</em></td>
-</tr>
-<tr>
-  <td colspan="3">
-  </td>
-  <td>404 Not Found</td>
-  <td><em>empty</em></td>
-</tr>
-<tr>
-<td>PATCH</td>
-<td>`/uploads/:id`</td>
-<td><em>upload</em></td>
-<td>204, No Content</td>
-<td><strong>empty</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>400 Bad Request</td>
-  <td><strong>errors</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>400 Bad Request</td>
-  <td><em>empty</em></td>
-</tr>
-<tr>
-<td>GET</td>
-<td>`/uploadowners`</td>
-<td><strong>n/a</strong></td>
-<td>200, OK</td>
-<td><strong>users</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>400 Bad Request</td>
-  <td><strong>errors</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>404 Not Found</td>
-  <td><em>empty</em></td>
-</tr>
-<tr>
-<td>GET</td>
-<td>`/uploads/folder/:path/:owner`</td>
-<td><strong>n/a</strong></td>
-<td>200, OK</td>
-<td><strong>user</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>400 Bad Request</td>
-  <td><strong>errors</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>404 Not Found</td>
-  <td><em>empty</em></td>
-</tr>
-<td>GET</td>
-<td>`/folders/:id`</td>
-<td><strong>n/a</strong></td>
-<td>200, OK</td>
-<td><strong>uploads</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>400 Bad Request</td>
-  <td><strong>errors</strong></td>
-</tr>
-<tr>
-  <td colspan="3"></td>
-  <td>404 Not Found</td>
-  <td><em>empty</em></td>
-</tr>
-</table>
+The Quantums table holds a copy of each count made by the user.
 
 #### POST /researches/:id
 

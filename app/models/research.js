@@ -42,9 +42,9 @@ const researchSchema = new mongoose.Schema({
       ret.editable = userId && userId.equals(doc._owner)
       if (options.research) {
         ret.total = options.research.total
-      } // else {
-      //   ret.total = 0
-      // }
+      } else {
+        ret.total = 0
+      }
       return ret
     }
   }
